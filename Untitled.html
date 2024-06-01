@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2113.65">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">&lt;!DOCTYPE html&gt;</p>
+<p class="p1">&lt;html lang="en"&gt;</p>
+<p class="p1">&lt;head&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta charset="UTF-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;title&gt;Pomodoro Timer&lt;/title&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;style&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>body {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>justify-content: center;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>align-items: center;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>height: 100vh;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-color: #f4f4f4;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-family: Arial, sans-serif;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>#pomodoro {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>text-align: center;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>#time {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 48px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>button {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 10px 20px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin: 5px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>cursor: pointer;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/style&gt;</p>
+<p class="p1">&lt;/head&gt;</p>
+<p class="p1">&lt;body&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div id="pomodoro"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div id="time"&gt;25:00&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;button onclick="startTimer()"&gt;Start&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;button onclick="resetTimer()"&gt;Reset&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>let timer;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>let isRunning = false;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>let minutes = 25;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>let seconds = 0;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function updateDisplay() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const minutesDisplay = minutes &lt; 10 ? `0${minutes}` : minutes;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const secondsDisplay = seconds &lt; 10 ? `0${seconds}` : seconds;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('time').textContent = `${minutesDisplay}:${secondsDisplay}`;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function startTimer() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (isRunning) return;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>isRunning = true;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>timer = setInterval(() =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (seconds === 0) {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>if (minutes === 0) {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>clearInterval(timer);</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>isRunning = false;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>alert('Time to take a break!');</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>minutes--;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>seconds = 59;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>seconds--;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                </span>updateDisplay();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}, 1000);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function resetTimer() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>clearInterval(timer);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>isRunning = false;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>minutes = 25;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>seconds = 0;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>updateDisplay();</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>updateDisplay();</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/script&gt;</p>
+<p class="p1">&lt;/body&gt;</p>
+<p class="p1">&lt;/html&gt;</p>
+</body>
+</html>
